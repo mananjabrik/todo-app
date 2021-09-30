@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 const httpCLient = axios.create({
 	baseURL: 'https://virtserver.swaggerhub.com',
 });
+
 export const useTodoQuery = () =>
 	useQuery('todo', async () => {
 		const axiosResponse = await httpCLient.get<TodoApiProps[]>(

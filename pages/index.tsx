@@ -1,37 +1,9 @@
 import type { NextPage } from 'next';
-import {
-	Container,
-	Text,
-	Stack,
-	GridItem,
-	Grid,
-	Heading,
-	FormControl,
-	FormLabel,
-	Input,
-	Button,
-	Table,
-	Th,
-	Tr,
-	Td,
-	Thead,
-	Tbody,
-	Box,
-	Icon,
-} from '@chakra-ui/react';
-
-import { useRecoilState } from 'recoil';
-import { todoApi } from '../state/todoApi';
-import { useTodoQuery } from './api/get-todo';
-import { useEffect } from 'react';
-import { TodoApiProps } from '../interface';
-import * as F from 'react-icons/fa';
+import { Container, GridItem, Grid, Button } from '@chakra-ui/react';
 import { Todo } from '../components/Todo';
+import { TakeData } from '../state/TakeData';
+
 const Home: NextPage = () => {
-	const { data } = useTodoQuery();
-
-	// console.log(FilterItems(data ?? [], '1'));
-
 	return (
 		<Container py="5">
 			<Button w="full" colorScheme="green">
@@ -44,14 +16,10 @@ const Home: NextPage = () => {
 				py="2"
 			>
 				<GridItem colSpan={6}>
-					<Todo
-						headTitle="Todo"
-						datas={data ?? []}
-						status="ongoing"
-					/>
+					<Todo headTitle="Todo" data={TakeData()} />
 				</GridItem>
 				<GridItem colSpan={6}>
-					<Todo headTitle="Done" datas={data ?? []} status="done" />
+					<Todo headTitle="Done" data={TakeData()} status="done" />
 				</GridItem>
 			</Grid>
 		</Container>
