@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Container, GridItem, Grid, Button, Heading } from '@chakra-ui/react';
+import { Container, GridItem, Grid, Heading } from '@chakra-ui/react';
 import { CreatorTodo, Todo } from '../components';
 import { StateData } from '../state';
 
