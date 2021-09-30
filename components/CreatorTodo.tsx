@@ -6,13 +6,14 @@ import {
 	useDisclosure,
 	FormControl,
 	FormLabel,
-	Text,
+	useToast,
 } from '@chakra-ui/react';
 import { TodoModal } from '.';
 import { useRecoilState } from 'recoil';
 import { todoApi } from '../state';
-import { TodoApiProps } from '../interface';
+
 export const CreatorTodo = () => {
+	const toast = useToast();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [todoData, setTodoData] = useRecoilState(todoApi);
 	const [typing, setTyping] = useState();
@@ -32,6 +33,13 @@ export const CreatorTodo = () => {
 				createdAt: Date(),
 			},
 		]);
+		toast({
+			title: 'Account created.',
+			description: "We've created your account for you.",
+			status: 'success',
+			duration: 9000,
+			isClosable: true,
+		});
 		onClose();
 	};
 
@@ -58,6 +66,3 @@ export const CreatorTodo = () => {
 		</Box>
 	);
 };
-function getRandomNumber(): never {
-	throw new Error('Function not implemented.');
-}

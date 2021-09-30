@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { useTodoQuery } from '../pages/api/get-todo';
 import { todoApi } from './todoApi';

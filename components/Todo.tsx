@@ -10,8 +10,6 @@ import {
 	FormLabel,
 	Input,
 	Button,
-	ButtonGroup,
-	IconButton,
 } from '@chakra-ui/react';
 
 import { TodoApiProps } from '../interface';
@@ -34,7 +32,7 @@ export const Todo: React.FC<TodoProps> = (props) => {
 		setTyping(e.target.value);
 	};
 	const onDone = () => {
-		setDone(true);
+		setDone(!done);
 	};
 
 	const addEntryClick = () => {
@@ -51,6 +49,7 @@ export const Todo: React.FC<TodoProps> = (props) => {
 		//@ts-ignore
 		setTodoData(updatedTodo);
 		setTake(undefined);
+		setDone(false);
 	};
 	return (
 		<Box>
@@ -79,7 +78,7 @@ export const Todo: React.FC<TodoProps> = (props) => {
 						spacing="1"
 						rounded="md"
 						onClick={() => {
-							setTake(todo);
+							props.status == 'done' ? null : setTake(todo);
 						}}
 					>
 						<Text>{todo.title}</Text>
@@ -100,7 +99,10 @@ export const Todo: React.FC<TodoProps> = (props) => {
 			})}
 			<TodoModal
 				isOpen={take ? true : false}
-				onClose={() => setTake(undefined)}
+				onClose={() => {
+					setTake(undefined);
+					setDone(false);
+				}}
 				headTitle="Update Todo"
 				save={addEntryClick}
 			>
@@ -113,8 +115,12 @@ export const Todo: React.FC<TodoProps> = (props) => {
 						onChange={onTyping}
 					></Input>
 
-					<Button mt="2" colorScheme="orange" onClick={onDone}>
-						click to done <Icon as={FaArrowRight}></Icon>
+					<Button
+						mt="2"
+						colorScheme={done ? 'green' : 'orange'}
+						onClick={onDone}
+					>
+						Done Todo <Icon as={FaArrowRight}></Icon>
 					</Button>
 				</FormControl>
 			</TodoModal>
