@@ -34,10 +34,10 @@ export const CreatorTodo = () => {
 			},
 		]);
 		toast({
-			title: 'Account created.',
-			description: "We've created your account for you.",
+			title: 'Todo created.',
+			description: "We've created your todo list",
 			status: 'success',
-			duration: 9000,
+			duration: 3000,
 			isClosable: true,
 		});
 		onClose();
