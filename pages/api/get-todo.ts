@@ -2,9 +2,7 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { TodoApiProps } from '../../interface';
-import { useRecoilState } from 'recoil';
-import { todoApi } from '../../state/todoApi';
-import { useEffect } from 'react';
+
 const httpCLient = axios.create({
 	baseURL: 'https://virtserver.swaggerhub.com',
 });
