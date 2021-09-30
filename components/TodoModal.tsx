@@ -13,6 +13,7 @@ interface TodoModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	headTitle: string;
+	save?: () => void;
 }
 export const TodoModal: React.FC<TodoModalProps> = (props) => {
 	return (
@@ -27,7 +28,9 @@ export const TodoModal: React.FC<TodoModalProps> = (props) => {
 					<Button colorScheme="blue" mr={3} onClick={props.onClose}>
 						Close
 					</Button>
-					<Button colorScheme="green">Save</Button>
+					<Button colorScheme="green" onClick={props.save}>
+						Save
+					</Button>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>

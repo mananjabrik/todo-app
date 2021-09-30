@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Stack, Text, Icon, Box, Heading } from '@chakra-ui/react';
+import {
+	Stack,
+	Text,
+	Icon,
+	Box,
+	Heading,
+	FormControl,
+	FormLabel,
+	Input,
+	Switch,
+} from '@chakra-ui/react';
 import { TodoApiProps } from '../interface';
-import { FilterTodo } from '.';
+import { FilterTodo, TodoModal } from '.';
 import { FaClipboardList, FaCheck } from 'react-icons/fa';
 
 interface TodoProps {
@@ -11,6 +21,7 @@ interface TodoProps {
 	status?: 'done' | 'ongoing';
 }
 export const Todo: React.FC<TodoProps> = (props) => {
+	const [take, setTake] = useState<TodoApiProps>();
 	return (
 		<Box>
 			<Box
@@ -37,6 +48,9 @@ export const Todo: React.FC<TodoProps> = (props) => {
 						cursor="pointer"
 						spacing="1"
 						rounded="md"
+						onClick={() => {
+							setTake(todo);
+						}}
 					>
 						<Text>{todo.title}</Text>
 						<Icon
@@ -54,6 +68,21 @@ export const Todo: React.FC<TodoProps> = (props) => {
 					</Stack>
 				);
 			})}
+			<TodoModal
+				isOpen={take ? true : false}
+				onClose={() => setTake(undefined)}
+				headTitle="Update Todo"
+				// save={addEntryClick}
+			>
+				<FormControl>
+					<FormLabel>Todo</FormLabel>
+					<Input
+						placeholder="Create Todo"
+						type="text"
+						defaultValue={take?.title}
+					></Input>
+				</FormControl>
+			</TodoModal>
 		</Box>
 	);
 };
