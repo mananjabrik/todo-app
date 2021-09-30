@@ -1,11 +1,14 @@
 import type { NextPage } from 'next';
-import { Container, GridItem, Grid, Button } from '@chakra-ui/react';
+import { Container, GridItem, Grid, Button, Heading } from '@chakra-ui/react';
 import { CreatorTodo, Todo } from '../components';
 import { StateData } from '../state';
 
 const Home: NextPage = () => {
 	return (
 		<Container py="5">
+			<Heading textAlign="center" my="5" color="green">
+				Todo Apps
+			</Heading>
 			<CreatorTodo />
 			<Grid
 				templateColumns="repeat(12, 1fr)"

@@ -20,18 +20,19 @@ export const CreatorTodo = () => {
 		setTyping(e.target.value);
 	};
 	const addEntryClick = () => {
-		const currentItemInCart = todoData.slice(-1)[0].id;
+		const currentTodo = todoData.slice(-1)[0].id;
 		//@ts-ignore
 		setTodoData((oldArray) => [
 			...oldArray,
 			{
-				id: currentItemInCart + 1,
+				id: currentTodo + 1,
 				status: 0,
 				title: typing,
 				description: '',
 				createdAt: Date(),
 			},
 		]);
+		onClose();
 	};
 
 	return (

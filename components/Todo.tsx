@@ -9,11 +9,16 @@ import {
 	FormControl,
 	FormLabel,
 	Input,
-	Switch,
+	Button,
+	ButtonGroup,
+	IconButton,
 } from '@chakra-ui/react';
+
 import { TodoApiProps } from '../interface';
 import { FilterTodo, TodoModal } from '.';
-import { FaClipboardList, FaCheck } from 'react-icons/fa';
+import { FaClipboardList, FaCheck, FaArrowRight } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
+import { todoApi } from '../state';
 
 interface TodoProps {
 	data: TodoApiProps[];
@@ -21,7 +26,32 @@ interface TodoProps {
 	status?: 'done' | 'ongoing';
 }
 export const Todo: React.FC<TodoProps> = (props) => {
+	const [todoData, setTodoData] = useRecoilState(todoApi);
 	const [take, setTake] = useState<TodoApiProps>();
+	const [typing, setTyping] = useState();
+	const [done, setDone] = useState(false);
+	const onTyping = (e: any) => {
+		setTyping(e.target.value);
+	};
+	const onDone = () => {
+		setDone(true);
+	};
+
+	const addEntryClick = () => {
+		const updatedTodo = todoData.map((todo) => {
+			if (todo.id == take?.id) {
+				return {
+					...todo,
+					title: typing ?? todo.title,
+					status: done ? 1 : 0,
+				};
+			}
+			return todo;
+		});
+		//@ts-ignore
+		setTodoData(updatedTodo);
+		setTake(undefined);
+	};
 	return (
 		<Box>
 			<Box
@@ -72,7 +102,7 @@ export const Todo: React.FC<TodoProps> = (props) => {
 				isOpen={take ? true : false}
 				onClose={() => setTake(undefined)}
 				headTitle="Update Todo"
-				// save={addEntryClick}
+				save={addEntryClick}
 			>
 				<FormControl>
 					<FormLabel>Todo</FormLabel>
@@ -80,7 +110,12 @@ export const Todo: React.FC<TodoProps> = (props) => {
 						placeholder="Create Todo"
 						type="text"
 						defaultValue={take?.title}
+						onChange={onTyping}
 					></Input>
+
+					<Button mt="2" colorScheme="orange" onClick={onDone}>
+						click to done <Icon as={FaArrowRight}></Icon>
+					</Button>
 				</FormControl>
 			</TodoModal>
 		</Box>
