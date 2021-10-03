@@ -9,7 +9,6 @@ const Home: NextPage = () => {
 			<Heading textAlign="center" my="5" color="green">
 				Todo Apps
 			</Heading>
-			<CreatorTodo />
 			<Grid
 				templateColumns="repeat(12, 1fr)"
 				templateRows="repeat(2, 1fr)"
@@ -23,6 +22,7 @@ const Home: NextPage = () => {
 					<Todo headTitle="Done" data={StateData()} status="done" />
 				</GridItem>
 			</Grid>
+			<CreatorTodo />
 		</Container>
 	);
 };

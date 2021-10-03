@@ -16,15 +16,14 @@ export const CreatorTodo = () => {
 	const toast = useToast();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [todoData, setTodoData] = useRecoilState(todoApi);
-	const [typing, setTyping] = useState();
+	const [typing, setTyping] = useState('');
 	const onTyping = (e: any) => {
 		setTyping(e.target.value);
 	};
 	const addEntryClick = () => {
 		const currentTodo = todoData.slice(-1)[0].id;
-		//@ts-ignore
-		setTodoData((oldArray) => [
-			...oldArray,
+		setTodoData([
+			...todoData,
 			{
 				id: currentTodo + 1,
 				status: 0,
